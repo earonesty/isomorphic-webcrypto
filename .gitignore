@@ -1,6 +1,4 @@
 .DS_Store
-webcrypto-shim.mjs
-webcrypto-liner.js
 tmp
 
 # Logs
