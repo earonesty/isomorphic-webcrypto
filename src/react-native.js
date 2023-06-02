@@ -7,6 +7,8 @@ if (require.getModules) {
     generateSecureRandom = require('react-native-securerandom').generateSecureRandom;
   } else if (NativeUnimoduleProxy && NativeUnimoduleProxy.exportedMethods.ExpoRandom) {
     generateSecureRandom = require('expo-crypto').getRandomBytesAsync;
+  } else if (NativeUnimoduleProxy && NativeUnimoduleProxy.exportedMethods.ExpoCrypto) {
+    generateSecureRandom = require('expo-crypto').getRandomBytesAsync;
   }
 }
 
@@ -16,13 +18,7 @@ if (!generateSecureRandom) {
     Install and configure react-native-securerandom or expo-crypto
     If managed by Expo, run 'expo install expo-crypto'
   `);
-  generateSecureRandom = function(length) {
-    const uint8Array = new Uint8Array(length);
-    while (length && length--) {
-      uint8Array[length] = Math.floor(Math.random() * 256);
-    }
-    return Promise.resolve(uint8Array);
-  }
+  throw Error("cannot ensure the security of random number generator, not starting")
 }
 
 const str2buf = require('str2buf');
