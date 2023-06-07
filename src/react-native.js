@@ -15,7 +15,7 @@ if (!generateSecureRandom) {
     Install and configure react-native-securerandom or expo-crypto
     If managed by Expo, run 'expo install expo-crypto'
   `);
-  throw Error("cannot ensure the security of random number generator, not starting")
+  throw Error("isomorphic-webcrypto cannot ensure the security of your random number generator, not starting")
 }
 
 const str2buf = require('str2buf');
