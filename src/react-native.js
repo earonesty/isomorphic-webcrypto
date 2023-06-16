@@ -1,6 +1,4 @@
-import 'react-native-get-random-values'
-
-const grv = crypto.getRandomValues
+import * as Crypto from 'expo-crypto';
 
 const str2buf = require('str2buf');
 const b64u = require('b64u-lite');
@@ -16,9 +14,8 @@ global.msrCryptoPermanentForceSync = true;
 
 global.crypto = require('msrcrypto');
 
-const crypto = global.crypto
-
-crypto.getRandomValues = grv
+crypto.getRandomValues = Crypto.getRandomValues
+crypto.randomUUID = Crypto.randomUUID
 
 function standardizeAlgoName(algo) {
   const upper = algo.toUpperCase();
