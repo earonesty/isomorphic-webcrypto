@@ -68,7 +68,6 @@
     "webpack": "^4.42.0"
   },
   "optionalDependencies": {
-    "expo-crypto": "*",
     "react-native-get-random-values": "^1.9"
   }
 }

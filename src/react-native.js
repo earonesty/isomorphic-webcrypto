@@ -1,5 +1,7 @@
 import 'react-native-get-random-values'
 
+const grv = crypto.getRandomValues
+
 const str2buf = require('str2buf');
 const b64u = require('b64u-lite');
 const b64 = require('b64-lite');
@@ -12,7 +14,11 @@ global.atob = typeof atob === 'undefined' ? b64.atob : atob;
 global.btoa = typeof btoa === 'undefined' ? b64.btoa : btoa;
 global.msrCryptoPermanentForceSync = true;
 
-const crypto = require('msrcrypto');
+global.crypto = require('msrcrypto');
+
+const crypto = global.crypto
+
+crypto.getRandomValues = grv
 
 function standardizeAlgoName(algo) {
   const upper = algo.toUpperCase();
@@ -27,39 +33,6 @@ function ensureUint8Array(buffer) {
   if (buffer instanceof Uint8Array) return buffer;
   return buffer;
 }
-
-// wrap all methods to ensure they're secure
-const methods = [
-  'decrypt',
-  'digest',
-  'deriveKey',
-  'encrypt',
-  'exportKey',
-  'generateKey',
-  'importKey',
-  'sign',
-  'unwrapKey',
-  'verify',
-  'wrapKey'
-]
-methods.map(key => {
-  const original = crypto.subtle[key]
-  const proxy = function() {
-    const args = Array.from(arguments)
-    const before = crypto.subtle[key];
-    return crypto.ensureSecure()
-    .then(() => {
-      const after = crypto.subtle[key];
-      if (before === after) {
-        return original.apply(crypto.subtle, args)
-      } else {
-        return crypto.subtle[key].apply(crypto.subtle, args)
-      }
-    });
-  }
-  crypto.subtle[key] = proxy;
-  crypto.subtle[key].name = key;
-})
 
 const originalGenerateKey = crypto.subtle.generateKey;
 crypto.subtle.generateKey = function generateKey() {
