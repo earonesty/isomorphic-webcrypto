@@ -1,2 +1,2 @@
-import { Crypto } from '@peculiar/webcrypto'
-export default new Crypto()
+globalThis.crypto = require('crypto').webcrypto
+module.exports = globalThis.crypto

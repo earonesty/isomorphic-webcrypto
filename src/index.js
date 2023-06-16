@@ -1,2 +1,2 @@
-const { Crypto } = require('@peculiar/webcrypto')
-module.exports = new Crypto()
+globalThis.crypto = require('crypto').webcrypto
+module.exports = globalThis.crypto
