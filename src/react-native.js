@@ -7,7 +7,12 @@ const b64 = require('b64-lite');
 if(global.window.navigator === undefined)
   global.window.navigator = {};
 
-global.window.navigator.userAgent = '';
+try {
+    global.window.navigator.userAgent = '';
+} catch {
+    // some msrcrypto thing dealt with as long as it's not undefined
+}
+
 global.atob = typeof atob === 'undefined' ? b64.atob : atob;
 global.btoa = typeof btoa === 'undefined' ? b64.btoa : btoa;
 global.msrCryptoPermanentForceSync = true;
