@@ -62,8 +62,8 @@
     "karma-virtualbox-edge-launcher": "^1.1.8",
     "karma-virtualbox-ie11-launcher": "^1.1.8",
     "karma-webpack": "^4.0.2",
-    "react": "^16.9.0",
-    "react-native": "^0.71.11",
+    "react": "^18.2",
+    "react-native": "^0.71",
     "webcrypto-test-suite": "^0.4.0",
     "webpack": "^4.42.0"
   },
